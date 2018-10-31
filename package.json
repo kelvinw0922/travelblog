@@ -1,0 +1,15 @@
+{
+  "name": "travelblog",
+  "version": "1.0.0",
+  "description": "A website application to share travel memories or write private travel blog",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Kelvin Wong",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.8"
+  }
+}
