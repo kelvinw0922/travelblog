@@ -3,8 +3,23 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 
+// Load Keys
+const keys = require("./config/keys");
+
+// Map Global Promises - Mongoose
+mongoose.Promise = global.Promise;
+
 // Passport Config
 require("./config/passport")(passport);
+
+// Mongoose Connect
+mongoose
+  .connect(
+    keys.mongoURI,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 // Use ExpressJS
 const app = express();
