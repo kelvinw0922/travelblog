@@ -1,10 +1,12 @@
 const express = require("express");
+const passport = require("passport");
 
 // Inside Auth's route - .../auth/
 const router = express.Router();
 
-router.get("/google", (req, res) => {
-  res.send("Auth");
-});
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
 module.exports = router;
