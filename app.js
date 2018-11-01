@@ -6,6 +6,9 @@ const passport = require("passport");
 // Load Keys
 const keys = require("./config/keys");
 
+// Load User Model
+require("./model/User");
+
 // Map Global Promises - Mongoose
 mongoose.Promise = global.Promise;
 
