@@ -47,4 +47,13 @@ module.exports = function(passport) {
       }
     )
   );
+
+  // Passort Serialize
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
+  });
+  // Passport Deserialize
+  passport.deserializeUser((id, done) => {
+    User.findById(id).then(user => done(null, user));
+  });
 };

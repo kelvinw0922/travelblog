@@ -1,6 +1,8 @@
 // Initial Setup
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const passport = require("passport");
 
 // Load Keys
@@ -29,6 +31,22 @@ const app = express();
 
 // Load Routes
 const auth = require("./routes/auth");
+
+// CookieParser Middleware
+app.use(cookieParser());
+
+// Express-Session Middleware
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Route
 app.get("/", (req, res) => {
