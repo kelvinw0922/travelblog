@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
+const exphbs = require("express-handlebars");
 
 // Load Keys
 const keys = require("./config/keys");
@@ -30,6 +31,7 @@ mongoose
 const app = express();
 
 // Load Routes
+const index = require("./routes/index");
 const auth = require("./routes/auth");
 
 // CookieParser Middleware
@@ -48,6 +50,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Hnadlebars Middleware
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main"
+  })
+);
+app.set("view engine", "handlebars");
+
 // Set Global Vars
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
@@ -55,10 +66,7 @@ app.use((req, res, next) => {
 });
 
 // Route
-app.get("/", (req, res) => {
-  res.send("It Works");
-});
-
+app.use("/", index);
 app.use("/auth", auth);
 
 // Dynamic Port#, either develop port or localhost 5000
