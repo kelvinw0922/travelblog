@@ -1,0 +1,34 @@
+<nav class="grey darken-3">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="/blogs" class="brand-logo center">Travel Blogs</a>
+            <a href="#!" data-target="side-menu" class="sidenav-trigger button-collapse show-on-large"><i class="fa fa-bars"></i></a>
+            <!-- RIGHT NAV -->
+            <ul class="right hide-on-small-only">
+                {{#if user}}
+                <li><a href="/dashboard">Welcome, {{user.firstName}}</a></li>
+                <li><a href="/auth/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+                {{else}}
+                <li><a href="/blogs"><i class="fa fa-book"></i> Public Stories</a></li>
+                {{/if}}
+            </ul>
+            <!-- SIDE NAVBAR -->
+            <ul class="sidenav" id="side-menu">
+                {{#if user}}
+
+                {{else}}
+                <li><a href="/auth/google" class="btn red darken-1"><i class="fa fa-google left"></i> Login With Google</a></li>
+                {{/if}}
+                <li><a href="/blogs"><i class="fa fa-book"></i> Public Stories</a></li>
+                {{#if user}}
+                <li class="divider"></li>
+                <li><a href="/dashboard"><i class="fa fa-cog"></i> Dashboard</a></li>
+                <li><a href="/blogs/my"><i class="fa fa-user"></i> My Stroy</a></li>
+                <li><a href="/auth/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+                {{/if}}
+                <li class="divider"></li>
+                <li><a class="sidenav-close right" href="#!"><i class="fa fa-ban"></i> Close</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
