@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const exphbs = require("express-handlebars");
+const path = require("path");
 
 // Load Keys
 const keys = require("./config/keys");
@@ -65,6 +66,9 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
+
+// Set Static Folder
+app.use(express.static(path.join(__dirname, "public")));
 
 // Route
 app.use("/", index);
