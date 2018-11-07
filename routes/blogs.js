@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index/welcome");
+  res.render("blogs/index");
 });
 
-router.get("/dashboard", (req, res) => {
-  res.render("index/dashboard");
+// Add Blog Form
+router.get("/add", (req, res) => {
+  res.render("blogs/add");
 });
 
 module.exports = router;

@@ -33,6 +33,7 @@ const app = express();
 // Load Routes
 const index = require("./routes/index");
 const auth = require("./routes/auth");
+const blogs = require("./routes/blogs");
 
 // CookieParser Middleware
 app.use(cookieParser());
@@ -68,6 +69,7 @@ app.use((req, res, next) => {
 // Route
 app.use("/", index);
 app.use("/auth", auth);
+app.use("/blogs", blogs);
 
 // Dynamic Port#, either develop port or localhost 5000
 const port = process.env.PORT || 5000;
