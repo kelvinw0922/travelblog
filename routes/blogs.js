@@ -11,4 +11,9 @@ router.get("/add", ensureAuthenticated, (req, res) => {
   res.render("blogs/add");
 });
 
+// Private Stories
+router.get("/my", ensureAuthenticated, (req, res) => {
+  res.render("blogs/show");
+});
+
 module.exports = router;
