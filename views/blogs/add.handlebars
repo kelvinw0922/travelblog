@@ -4,19 +4,37 @@
         <div class="row">
             <div class="input-field">
                 <label for="title">Title</label>
-                <input type="text" name="title">
+                <input type="text" name="title" placeholder="Please enter the journey's title">
             </div>
         </div>
 
         <div class="row">
             <div class="input-field">
-                <label for="status">Status</label>
                 <select name="status">
                     <option value="public" selected>Public</option>
                     <option value="private">Private</option>
                     <option value="unpublished">Unpublished</option>
                 </select>
+                <label for="status">Status</label>
             </div>
         </div>
+
+        <div class="row">
+            <p>
+                <label for="allowComments">
+                    <input type="checkbox" name="allowComments" id="filled-in-box" class="filled-in" checked="checked">
+                    <span>Allow Comments</span>
+                </label>
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Tell Us Your Travel Story</h5>
+                <textarea name="body" placeholder="Please enter your journey" rows="10"></textarea>
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="btn">
     </form>
 </div>
