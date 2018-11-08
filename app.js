@@ -6,12 +6,14 @@ const session = require("express-session");
 const passport = require("passport");
 const exphbs = require("express-handlebars");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 // Load Keys
 const keys = require("./config/keys");
 
-// Load User Model
+// Load Models
 require("./model/User");
+require("./model/Blog");
 
 // Map Global Promises - Mongoose
 mongoose.Promise = global.Promise;
@@ -30,6 +32,12 @@ mongoose
 
 // Use ExpressJS
 const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 // Load Routes
 const index = require("./routes/index");
