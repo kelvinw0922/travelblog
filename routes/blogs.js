@@ -8,12 +8,32 @@ const Blog = mongoose.model("blogs");
 const User = mongoose.model("users");
 
 router.get("/", (req, res) => {
-  res.render("blogs/index");
+  // Display only public blogs, not private
+  Blog.find({ status: "public" })
+    .populate("user") // Populate the user's field
+    .then(blogs => {
+      res.render("blogs/index", {
+        blogs: blogs
+      });
+    });
 });
 
 // Add Blog Form
 router.get("/add", ensureAuthenticated, (req, res) => {
   res.render("blogs/add");
+});
+
+// Show Single Blog
+router.get("/show/:id", (req, res) => {
+  Blog.findOne({
+    _id: req.params.id
+  })
+    .populate("user")
+    .then(blog => {
+      res.render("blogs/show", {
+        blog: blog
+      });
+    });
 });
 
 // Private Stories

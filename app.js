@@ -8,8 +8,9 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const bodyParser = require("body-parser");
 
-// Load Keys
+// Load Helpers
 const keys = require("./config/keys");
+const { truncate, stripTags, formatDate } = require("./helpers/handlebars");
 
 // Load Models
 require("./model/User");
@@ -64,6 +65,11 @@ app.use(passport.session());
 app.engine(
   "handlebars",
   exphbs({
+    helpers: {
+      truncate: truncate,
+      stripTags: stripTags,
+      formatDate: formatDate
+    },
     defaultLayout: "main"
   })
 );

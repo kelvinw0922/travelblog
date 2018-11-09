@@ -1,2 +1,31 @@
 <h1>Welcome, {{user.firstName}} {{user.lastName}}</h1>
-<h4>Your Story</h4>
+<h4>Your Stories</h4>
+{{#if blogs}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each blogs}}
+        <tr>
+            <td><a href="/blogs/show/{{id}}">{{title}}</a></td>
+            <td>{{formatDate date 'MMMM Do YYYY'}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            <td><a href="/blogs/edit/{{id}}" class="btn"><i class="fa fa-pencil"></i> Edit</a></td>
+            <td>
+                <form action="/blogs/{{id}}" method="POST" id="delete-form">
+                    <button type="submit" class="btn red"><i class="fa fa-remove"></i> Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>You have not created any travelling journey yet</p>
+{{/if}}

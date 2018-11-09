@@ -19,3 +19,15 @@ footer {
 textarea {
   height: auto;
 }
+
+.blog-text {
+  height: 120px;
+}
+
+.dash-status {
+  text-transform: capitalize;
+}
+
+#delete-form {
+  display: inline;
+}
