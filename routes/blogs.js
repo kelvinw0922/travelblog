@@ -78,4 +78,30 @@ router.post("/", (req, res) => {
   });
 });
 
+// Process Edit Blogs (PUT)
+router.put("/:id", (req, res) => {
+  //res.send("put");
+  Blog.findOne({
+    _id: req.params.id
+  }).then(blog => {
+    let allowComments;
+
+    if (req.body.allowComments) {
+      allowComments = true;
+    } else {
+      allowComments = false;
+    }
+
+    // New values
+    blog.title = req.body.title;
+    blog.body = req.body.body;
+    blog.status = req.body.status;
+    blog.allowComments = allowComments;
+
+    blog.save().then(blog => {
+      res.redirect("/dashboard");
+    });
+  });
+});
+
 module.exports = router;

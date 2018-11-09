@@ -7,6 +7,7 @@ const passport = require("passport");
 const exphbs = require("express-handlebars");
 const path = require("path");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 
 // Load Helpers
 const keys = require("./config/keys");
@@ -38,6 +39,9 @@ mongoose
 
 // Use ExpressJS
 const app = express();
+
+// Method Override Middleware
+app.use(methodOverride("_method"));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

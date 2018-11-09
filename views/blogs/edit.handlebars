@@ -1,6 +1,7 @@
 <h1>Edit Story</h1>
 <div class="row">
-    <form action="/blogs" method="POST" class="col s12">
+    <form action="/blogs/{{blog.id}}?_method=PUT" method="POST" class="col s12">
+        <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="input-field">
                 <label for="title">Title</label>
