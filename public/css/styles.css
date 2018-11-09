@@ -32,3 +32,16 @@ textarea {
 #delete-form {
   display: inline;
 }
+
+.word-wrapping {
+  word-wrap: break-word;
+}
+
+.goback-btn {
+  margin-top: 20px;
+}
+
+.fixed-action-btn {
+  right: 150px;
+  top: 90px;
+}

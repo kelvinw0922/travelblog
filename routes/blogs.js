@@ -36,13 +36,15 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
 
 // Show Single Blog
 router.get("/show/:id", (req, res) => {
+  let previousPage = req.header("Referer") || "/";
   Blog.findOne({
     _id: req.params.id
   })
     .populate("user")
     .then(blog => {
       res.render("blogs/show", {
-        blog: blog
+        blog: blog,
+        previousPage: previousPage
       });
     });
 });
@@ -110,4 +112,26 @@ router.delete("/:id", (req, res) => {
     res.redirect("/dashboard");
   });
 });
+
+// Add Comment
+router.post("/comment/:id", (req, res) => {
+  Blog.findById({
+    _id: req.params.id
+  }).then(blog => {
+    // Create a new comment object
+    const newComment = {
+      commentBody: req.body.commentBody,
+      commentUser: req.user.id
+    };
+
+    // Add the comment object to the comment array in a Blog object
+    blog.comments.unshift(newComment);
+
+    // Save
+    blog.save().then(blog => {
+      res.redirect(`/blogs/show/${blog.id}`);
+    });
+  });
+});
+
 module.exports = router;
