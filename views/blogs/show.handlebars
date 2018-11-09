@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col s12 m8">
-        <h3>{{blog.title}}</h3>
+        <h3 style="word-wrap: break-word;">{{blog.title}}</h3>
         <div class="card story">
-            <div class="card-content">
+            <div class="card-content" style="word-wrap: break-word;">
                 <span class="card-title">{{formatDate blog.date 'MMMM Do YYYY'}}</span>
                 <!-- Need tripe bracket to parse HTML text -->
                 {{{blog.body}}}

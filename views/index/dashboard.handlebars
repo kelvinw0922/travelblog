@@ -13,7 +13,7 @@
     <tbody>
         {{#each blogs}}
         <tr>
-            <td><a href="/blogs/show/{{id}}">{{title}}</a></td>
+            <td><a href="/blogs/show/{{id}}">{{truncate title 50}}</a></td>
             <td>{{formatDate date 'MMMM Do YYYY'}}</td>
             <td><span class="dash-status">{{status}}</span></td>
             <td><a href="/blogs/edit/{{id}}" class="btn"><i class="fa fa-pencil"></i> Edit</a></td>

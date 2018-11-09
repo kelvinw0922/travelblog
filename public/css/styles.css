@@ -22,6 +22,7 @@ textarea {
 
 .blog-text {
   height: 120px;
+  word-wrap: break-word;
 }
 
 .dash-status {

@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="card-content center-align">
-                <h5>{{title}}</h5>
+                <span class="card-title"><strong>{{truncate title 20}}</strong></span>
                 <!-- Need tripe bracket to parse HTML text -->
                 <!-- <p class="story-text">{{{body}}}</p> -->
                 <p class="blog-text">{{truncate (stripTags body) 150}}</p>
