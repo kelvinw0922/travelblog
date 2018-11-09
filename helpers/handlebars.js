@@ -1,6 +1,7 @@
 const moment = require("moment");
 
 module.exports = {
+  // Truncate the body to a reasonable length
   truncate: function(str, len) {
     if (str.length > len && str.length > 0) {
       var new_str = str + " ";
@@ -11,10 +12,22 @@ module.exports = {
     }
     return str;
   },
+  // Strip away the HTML tags from the body
   stripTags: function(input) {
     return input.replace(/<(?:.|\n)*?>/gm, "");
   },
+  // Change the Date to a human-readable format
   formatDate: function(date, format) {
     return moment(date).format(format);
+  },
+  // Read select value
+  select: function(selected, options) {
+    return options
+      .fn(this)
+      .replace(new RegExp(' value="' + selected + '"'), '$&selected="selected"')
+      .replace(
+        new RegExp(">" + selected + "</option>"),
+        'selected="selected"$&'
+      );
   }
 };

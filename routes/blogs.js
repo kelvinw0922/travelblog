@@ -23,6 +23,17 @@ router.get("/add", ensureAuthenticated, (req, res) => {
   res.render("blogs/add");
 });
 
+// Edit Blog Form
+router.get("/edit/:id", ensureAuthenticated, (req, res) => {
+  Blog.findOne({
+    _id: req.params.id
+  }).then(blog => {
+    res.render("blogs/edit", {
+      blog: blog
+    });
+  });
+});
+
 // Show Single Blog
 router.get("/show/:id", (req, res) => {
   Blog.findOne({
