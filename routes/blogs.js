@@ -104,4 +104,10 @@ router.put("/:id", (req, res) => {
   });
 });
 
+// Process Delete Blogs (DELETE)
+router.delete("/:id", (req, res) => {
+  Blog.findByIdAndDelete({ _id: req.params.id }).then(() => {
+    res.redirect("/dashboard");
+  });
+});
 module.exports = router;

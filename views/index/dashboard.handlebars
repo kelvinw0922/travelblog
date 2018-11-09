@@ -18,7 +18,8 @@
             <td><span class="dash-status">{{status}}</span></td>
             <td><a href="/blogs/edit/{{id}}" class="btn"><i class="fa fa-pencil"></i> Edit</a></td>
             <td>
-                <form action="/blogs/{{id}}" method="POST" id="delete-form">
+                <form action="/blogs/{{id}}?_method=DELETE" method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn red"><i class="fa fa-remove"></i> Delete</button>
                 </form>
             </td>
