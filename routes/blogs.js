@@ -19,9 +19,20 @@ router.get("/", (req, res) => {
     });
 });
 
-// List all blogs from a user - Private Stories
+// List all blogs from a user
 router.get("/user/:userId", (req, res) => {
   Blog.find({ user: req.params.userId, status: "public" })
+    .populate("user")
+    .then(blogs => {
+      res.render("blogs/index", {
+        blogs: blogs
+      });
+    });
+});
+
+//Private Stories
+router.get("/my", ensureAuthenticated, (req, res) => {
+  Blog.find({ user: req.user.id })
     .populate("user")
     .then(blogs => {
       res.render("blogs/index", {
@@ -60,10 +71,29 @@ router.get("/show/:id", (req, res) => {
     .populate("user")
     .populate("comments.commentUser")
     .then(blog => {
-      res.render("blogs/show", {
-        blog: blog,
-        previousPage: previousPage
-      });
+      if (blog.status == "public") {
+        res.render("blogs/show", {
+          blog: blog,
+          previousPage: previousPage
+        });
+      } else {
+        if (req.user) {
+          if (req.user.id == blog.user._id) {
+            res.render("blogs/show", {
+              blog: blog,
+              previousPage: previousPage
+            });
+          } else {
+            res.redirect("/blogs");
+          }
+        } else {
+          res.redirect("/blogs");
+        }
+      }
+      // res.render("blogs/show", {
+      //   blog: blog,
+      //   previousPage: previousPage
+      // });
     });
 });
 
