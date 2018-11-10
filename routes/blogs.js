@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
   // Display only public blogs, not private
   Blog.find({ status: "public" })
     .populate("user") // Populate the user's field
+    .sort({ date: "desc" })
     .then(blogs => {
       res.render("blogs/index", {
         blogs: blogs
