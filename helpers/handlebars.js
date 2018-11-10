@@ -29,5 +29,17 @@ module.exports = {
         new RegExp(">" + selected + "</option>"),
         'selected="selected"$&'
       );
+  },
+  // Check User - Remove Edit Icons
+  editIcon: function(blogUser, loggedUser, blogID, floating = true) {
+    if (blogUser == loggedUser) {
+      if (floating) {
+        return `<a href="/blogs/edit/${blogID}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="fa fa-pencil"></i></a>`;
+      } else {
+        return `<a href="/blogs/edit/${blogID}"><i class="fa fa-pencil"></i></a>`;
+      }
+    } else {
+      return "";
+    }
   }
 };

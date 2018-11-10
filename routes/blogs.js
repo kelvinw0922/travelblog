@@ -29,9 +29,14 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
   Blog.findOne({
     _id: req.params.id
   }).then(blog => {
-    res.render("blogs/edit", {
-      blog: blog
-    });
+    // Check if the logged in user is the blog's user
+    if (blog.user != req.user.id) {
+      res.redirect("/blogs");
+    } else {
+      res.render("blogs/edit", {
+        blog: blog
+      });
+    }
   });
 });
 

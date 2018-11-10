@@ -1,7 +1,10 @@
 <div class="row">
     <div class="col s12 m8">
         <a href="{{previousPage}}" class="waves-effect waves-light btn goback-btn light-blue lighten-1">Go Back</a>
-        <h3 class="word-wrapping">{{blog.title}}</h3>
+        <h3 class="word-wrapping">
+            {{blog.title}}
+            <small>{{{editIcon blog.user.id user.id blog.id false}}}</small>
+        </h3>
         <div class="card story">
             <div class="card-content word-wrapping">
                 <span class="card-title">{{formatDate blog.date 'MMMM Do YYYY'}}</span>
