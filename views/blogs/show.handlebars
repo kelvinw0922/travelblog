@@ -17,14 +17,14 @@
         {{#if blog.allowComments}}
         <div class="card">
             <div class="card-content">
-                <span class="card-title">Comments</span>
+                <span class="card-title"><i class="fa fa-comment"></i> Comments</span>
                 {{#each blog.comments}}
                 <hr>
                 <div class="card-content">
                     <h5>{{commentBody}}</h5>
                     <div class="chip">
                         <img src="{{commentUser.image}}" alt="{{commentUser.firstName}} {{commentUser.lastName}}">
-                        {{commentUser.firstName}} {{commentUser.lastName}}
+                        <a href="/blogs/user/{{commentUser.id}}">{{commentUser.firstName}} {{commentUser.lastName}}</a>
                     </div>
                     <br>
                     <small>Posted: {{formatDate commentDate 'MMMM Do YYYY'}}</small>

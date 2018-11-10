@@ -19,6 +19,17 @@ router.get("/", (req, res) => {
     });
 });
 
+// List all blogs from a user - Private Stories
+router.get("/user/:userId", (req, res) => {
+  Blog.find({ user: req.params.userId, status: "public" })
+    .populate("user")
+    .then(blogs => {
+      res.render("blogs/index", {
+        blogs: blogs
+      });
+    });
+});
+
 // Add Blog Form
 router.get("/add", ensureAuthenticated, (req, res) => {
   res.render("blogs/add");
@@ -42,7 +53,7 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
 
 // Show Single Blog
 router.get("/show/:id", (req, res) => {
-  let previousPage = req.header("Referer") || "/";
+  let previousPage = "/blogs";
   Blog.findOne({
     _id: req.params.id
   })
@@ -54,11 +65,6 @@ router.get("/show/:id", (req, res) => {
         previousPage: previousPage
       });
     });
-});
-
-// Private Stories
-router.get("/my", ensureAuthenticated, (req, res) => {
-  res.render("blogs/show");
 });
 
 // Process Add Blogs (POST)

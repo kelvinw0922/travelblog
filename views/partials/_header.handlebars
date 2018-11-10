@@ -15,7 +15,16 @@
             <!-- SIDE NAVBAR -->
             <ul class="sidenav" id="side-menu">
                 {{#if user}}
-
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="/img/sidenav_background.jpg" alt="background">
+                        </div>
+                        <a href="#user"><img src="{{user.image}}" alt="profile_image" class="circle"></a>
+                        <a href="#name"><span class="white-text name">{{user.firstName}} {{user.lastName}}</span></a>
+                        <a href="#email"><span class="white-text email">{{user.email}}</span></a>
+                    </div>
+                </li>
                 {{else}}
                 <li><a href="/auth/google" class="btn red darken-1"><i class="fa fa-google left"></i> Login With Google</a></li>
                 {{/if}}
@@ -23,7 +32,8 @@
                 {{#if user}}
                 <li class="divider"></li>
                 <li><a href="/dashboard"><i class="fa fa-cog"></i> Dashboard</a></li>
-                <li><a href="/blogs/my"><i class="fa fa-user"></i> My Story</a></li>
+                <li><a href="/blogs/user/{{user.id}}"><i class="fa fa-user"></i> My Story</a></li>
+                <li><a href="/blogs/add"><i class="fa fa-edit"></i> Add New Story</a></li>
                 <li><a href="/auth/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                 {{/if}}
                 <li class="divider"></li>
