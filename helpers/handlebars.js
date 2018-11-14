@@ -41,5 +41,55 @@ module.exports = {
     } else {
       return "";
     }
+  },
+  checkScoreStatus: function(scoreStatus, userID, blogID, score) {
+    if (scoreStatus.length == 0) {
+      return `
+      <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
+        <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_upward</i></button>
+      </form>
+      <div class="story_score">${score}</div>
+      <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
+        <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_downward</i></button>
+      </form>`;
+    } else {
+      var found = false;
+      for (var i = 0; i < scoreStatus.length; i++) {
+        if (scoreStatus[i].voteUser.id == userID) {
+          if (scoreStatus[i].vote == "upvote") {
+            found = true;
+            return `
+            <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
+              <button type="submit" class="unstyled_button"><i class="small material-icons orange-text">arrow_upward</i></button>
+            </form>
+            <div class="story_score">${score}</div>
+            <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
+              <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_downward</i></button>
+            </form>`;
+          } else {
+            found = true;
+            return `
+            <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
+              <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_upward</i></button>
+            </form>
+            <div class="story_score">${score}</div>
+            <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
+              <button type="submit" class="unstyled_button light-blue-text text-darken-2"><i class="small material-icons">arrow_downward</i></button>
+            </form>`;
+          }
+        }
+      }
+      // User not found in scoreStatus = hasn't voted yet
+      if (!found) {
+        return `
+        <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
+          <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_upward</i></button>
+        </form>
+        <div class="story_score">${score}</div>
+        <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
+          <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_downward</i></button>
+        </form>`;
+      }
+    }
   }
 };

@@ -21,10 +21,14 @@
             </div>
             <div class="card-action center-align">
                 <a class="btn grey" href="/blogs/show/{{id}}">Read More</a>
+                {{#if ../user}}
+                {{{checkScoreStatus scoreStatus ../user.id id score}}}
+                {{/if}}
             </div>
         </div>
     </div>
     {{else}}
     <p>No story at the moment</p>
     {{/each}}
+
 </div>

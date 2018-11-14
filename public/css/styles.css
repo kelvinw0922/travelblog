@@ -45,3 +45,23 @@ textarea {
   right: 150px;
   top: 90px;
 }
+
+.unstyled_button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.unstyled_button:hover {
+  cursor: pointer;
+}
+
+.karmaForm {
+  display: inline;
+}
+
+.story_score {
+  display: inline;
+  font-size: 1.5rem;
+  font-weight: 500;
+}

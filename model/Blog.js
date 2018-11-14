@@ -42,7 +42,23 @@ const BlogSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  score: {
+    type: Number,
+    default: 0
+  },
+  scoreStatus: [
+    {
+      voteUser: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      },
+      vote: {
+        type: String,
+        default: "none"
+      }
+    }
+  ]
 });
 
 // Create Collection and add Schema
