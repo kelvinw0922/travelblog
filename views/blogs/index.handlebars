@@ -6,6 +6,8 @@
             <div class="card-image">
                 {{#if coverImage.data}}
                 {{{writeImage coverImage.data}}}
+                {{else}}
+                {{{defaultImage}}}
                 {{/if}}
                 {{#if user}}
                 {{{editIcon user.id ../user.id id}}}

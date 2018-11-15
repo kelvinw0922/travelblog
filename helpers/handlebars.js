@@ -95,5 +95,9 @@ module.exports = {
   writeImage: function(bufferImage) {
     const image = bufferImage.toString("base64");
     return `<img src="data:image/png;base64,${image}" alt="coverImage" class="coverImage">`;
+  },
+  defaultImage: function() {
+    const num = Math.floor(Math.random() * 4) + 1;
+    return `<img src="/img/default-coverimage/${num}.png" alt="default-${num}.png" class="coverImage">`;
   }
 };
