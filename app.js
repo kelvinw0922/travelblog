@@ -17,7 +17,8 @@ const {
   formatDate,
   select,
   editIcon,
-  checkScoreStatus
+  checkScoreStatus,
+  writeImage
 } = require("./helpers/handlebars");
 
 // Load Models
@@ -82,7 +83,8 @@ app.engine(
       formatDate: formatDate,
       select: select,
       editIcon: editIcon,
-      checkScoreStatus: checkScoreStatus
+      checkScoreStatus: checkScoreStatus,
+      writeImage: writeImage
     },
     defaultLayout: "main"
   })

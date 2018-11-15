@@ -91,5 +91,9 @@ module.exports = {
         </form>`;
       }
     }
+  },
+  writeImage: function(bufferImage) {
+    const image = bufferImage.toString("base64");
+    return `<img src="data:image/png;base64,${image}" alt="coverImage" class="coverImage">`;
   }
 };

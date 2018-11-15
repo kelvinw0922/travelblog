@@ -58,7 +58,11 @@ const BlogSchema = new Schema({
         default: "none"
       }
     }
-  ]
+  ],
+  coverImage: {
+    data: Buffer,
+    contentType: String
+  }
 });
 
 // Create Collection and add Schema

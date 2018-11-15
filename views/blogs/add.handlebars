@@ -1,6 +1,6 @@
 <h1>Add Story</h1>
 <div class="row">
-    <form action="/blogs" method="POST" class="col s12">
+    <form action="/blogs" method="POST" enctype="multipart/form-data" class="col s12">
         <div class="row">
             <div class="input-field">
                 <label for="title">Title</label>
@@ -26,6 +26,13 @@
                     <span>Allow Comments</span>
                 </label>
             </p>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <label for="coverImage">Cover Picture</label>
+                <input type="file" name="coverImage">
+            </div>
         </div>
 
         <div class="row">

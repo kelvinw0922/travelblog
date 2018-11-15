@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../helpers/auth");
 const mongoose = require("mongoose");
+const multer = require("multer");
+
+// Set up Multer
+const DIR = "../uploads/";
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage }).single("coverImage");
 
 // Load Blog and User Model
 const Blog = mongoose.model("blogs");
@@ -99,7 +105,7 @@ router.get("/show/:id", (req, res) => {
 });
 
 // Process Add Blogs (POST)
-router.post("/", (req, res) => {
+router.post("/", upload, (req, res) => {
   // console.log(req.body);
   // console.log(req.user);
   let allowComments;
@@ -110,12 +116,22 @@ router.post("/", (req, res) => {
     allowComments = false;
   }
 
+  // check coverImage
+  let coverImage_data, coverImage_contentType;
+  coverImage_contentType = "image/png";
+  coverImage_data = req.file.buffer;
+  const newCoverImage = {
+    data: coverImage_data,
+    contentType: coverImage_contentType
+  };
+
   const newBlog = {
     title: req.body.title,
     body: req.body.body,
     status: req.body.status,
     allowComments: allowComments,
-    user: req.user.id
+    user: req.user.id,
+    coverImage: newCoverImage
   };
 
   // Creat Blog

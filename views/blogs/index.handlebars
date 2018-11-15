@@ -4,6 +4,9 @@
     <div class="col s12 m6 l6 xl4">
         <div class="card">
             <div class="card-image">
+                {{#if coverImage.data}}
+                {{{writeImage coverImage.data}}}
+                {{/if}}
                 {{#if user}}
                 {{{editIcon user.id ../user.id id}}}
                 {{/if}}
