@@ -4,7 +4,7 @@
         <div class="row">
             <div class="input-field">
                 <label for="title">Title</label>
-                <input type="text" name="title" placeholder="Please enter the journey's title">
+                <input type="text" name="title" placeholder="Please enter the journey's title" required>
             </div>
         </div>
 
@@ -29,16 +29,21 @@
         </div>
 
         <div class="row">
-            <div class="input-field">
-                <label for="coverImage">Cover Picture</label>
-                <input type="file" name="coverImage" accept="image/x-png">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Please Select A Cover Image For Your Story (optional)</span>
+                    <input type="file" name="coverImage" accept="image/x-png">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field">
                 <h5>Tell Us Your Travel Story</h5>
-                <textarea name="body" placeholder="Please enter your journey" rows="10"></textarea>
+                <textarea name="body" id="body" rows="10" required>Your Journey...</textarea>
             </div>
         </div>
 
