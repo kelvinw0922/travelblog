@@ -3,11 +3,21 @@ const router = express.Router();
 const { ensureAuthenticated } = require("../helpers/auth");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const path = require("path");
 
 // Set up Multer
-const DIR = "../uploads/";
 var storage = multer.memoryStorage();
-var upload = multer({ storage: storage }).single("coverImage");
+
+var upload = multer({
+  storage: storage,
+  fileFilter: function(req, file, callback) {
+    var ext = path.extname(file.originalname.toLowerCase());
+    if (ext !== ".png") {
+      return callback(null, false);
+    }
+    callback(null, true);
+  }
+}).single("coverImage");
 
 // Load Blog and User Model
 const Blog = mongoose.model("blogs");
@@ -116,23 +126,34 @@ router.post("/", upload, (req, res) => {
     allowComments = false;
   }
 
-  // check coverImage
   let coverImage_data, coverImage_contentType;
   coverImage_contentType = "image/png";
-  coverImage_data = req.file.buffer;
-  const newCoverImage = {
-    data: coverImage_data,
-    contentType: coverImage_contentType
-  };
+  let newBlog;
 
-  const newBlog = {
-    title: req.body.title,
-    body: req.body.body,
-    status: req.body.status,
-    allowComments: allowComments,
-    user: req.user.id,
-    coverImage: newCoverImage
-  };
+  // Check if user has uploaded coverImage
+  if (req.file) {
+    coverImage_data = req.file.buffer;
+    const newCoverImage = {
+      data: coverImage_data,
+      contentType: coverImage_contentType
+    };
+    newBlog = {
+      title: req.body.title,
+      body: req.body.body,
+      status: req.body.status,
+      allowComments: allowComments,
+      user: req.user.id,
+      coverImage: newCoverImage
+    };
+  } else {
+    newBlog = {
+      title: req.body.title,
+      body: req.body.body,
+      status: req.body.status,
+      allowComments: allowComments,
+      user: req.user.id
+    };
+  }
 
   // Creat Blog
   new Blog(newBlog).save().then(blog => {
