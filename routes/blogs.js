@@ -339,4 +339,131 @@ router.post("/downvote/:id", (req, res) => {
   });
 });
 
+// Karma - Upvote
+router.get("/upvote", (req, res) => {
+  // const val = req.query.blogid;
+  // console.log(`In get, ${val}`);
+  // res.send("Got upvote");
+  Blog.findOne({
+    _id: req.query.blogid,
+    scoreStatus: { $elemMatch: { voteUser: req.user.id } }
+  }).then(blog => {
+    // User has not voted the story yet
+    if (!blog) {
+      // Find the story
+      Blog.findById({
+        _id: req.query.blogid
+      }).then(blog => {
+        // The user will upvote the story
+        const newScoreStatus = { voteUser: req.user.id, vote: "upvote" };
+        blog.score += 1;
+        blog.scoreStatus.unshift(newScoreStatus);
+        blog.save().then(blog => {
+          res.send({ newScore: blog.score, colored: true });
+        });
+      });
+    }
+    // User has voted the story before
+    else {
+      // Check if user has upvoted or downvoted the story
+      for (var i = 0; i < blog.scoreStatus.length; i++) {
+        if (blog.scoreStatus[i].voteUser == req.user.id) {
+          // If upvoted
+          if (blog.scoreStatus[i].vote == "upvote") {
+            // Removed scoreStatus for the user
+            Blog.updateOne(
+              { _id: req.query.blogid },
+              {
+                $pull: {
+                  scoreStatus: { voteUser: req.user.id }
+                }
+              },
+              { safe: true, multi: true }
+            ).then(result => {});
+            // Take off the score for the user
+            blog.score -= 1;
+            blog.save().then(blog => {
+              res.send({ newScore: blog.score, colored: false });
+            });
+            break;
+          }
+          // If downvoted
+          else {
+            // Take off the score for the user and upvote
+            blog.score += 2;
+            // Set vote to upvote
+            blog.scoreStatus[i].vote = "upvote";
+            blog.save().then(blog => {
+              res.send({ newScore: blog.score, colored: true });
+            });
+            break;
+          }
+        }
+      }
+    }
+  });
+});
+
+// Karma - Downvote
+router.get("/downvote", (req, res) => {
+  Blog.findOne({
+    _id: req.query.blogid,
+    scoreStatus: { $elemMatch: { voteUser: req.user.id } }
+  }).then(blog => {
+    // User has not voted the story yet
+    if (!blog) {
+      // Find the story
+      Blog.findById({
+        _id: req.query.blogid
+      }).then(blog => {
+        // The user will downvote the story
+        const newScoreStatus = { voteUser: req.user.id, vote: "downvote" };
+        blog.score -= 1;
+        blog.scoreStatus.unshift(newScoreStatus);
+        blog.save().then(blog => {
+          res.send({ newScore: blog.score, colored: true });
+        });
+      });
+    }
+    // User has voted the story before
+    else {
+      // Check if user has upvoted or downvoted the story
+      for (var i = 0; i < blog.scoreStatus.length; i++) {
+        if (blog.scoreStatus[i].voteUser == req.user.id) {
+          // If downvoted
+          if (blog.scoreStatus[i].vote == "downvote") {
+            // Removed scoreStatus for the user
+            Blog.updateOne(
+              { _id: req.query.blogid },
+              {
+                $pull: {
+                  scoreStatus: { voteUser: req.user.id }
+                }
+              },
+              { safe: true, multi: true }
+            ).then(result => {});
+            // Take off the score for the user
+            blog.score += 1;
+            blog.save().then(blog => {
+              res.send({ newScore: blog.score, colored: false });
+            });
+            break;
+          }
+          // If upvoted
+          else {
+            // Take off the score for the user and upvote
+            blog.score -= 2;
+            // Set vote to upvote
+            blog.scoreStatus[i].vote = "downvote";
+            blog.save().then(blog => {
+              res.send({ newScore: blog.score, colored: true });
+            });
+            break;
+          }
+        }
+      }
+    }
+  });
+});
+
 module.exports = router;

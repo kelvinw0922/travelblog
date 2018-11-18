@@ -45,13 +45,10 @@ module.exports = {
   checkScoreStatus: function(scoreStatus, userID, blogID, score) {
     if (scoreStatus.length == 0) {
       return `
-      <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
-        <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_upward</i></button>
-      </form>
-      <div class="story_score">${score}</div>
-      <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
-        <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_downward</i></button>
-      </form>`;
+      <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
+      <div class="story_score" id="score_${blogID}">${score}</div>
+      <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+      `;
     } else {
       var found = false;
       for (var i = 0; i < scoreStatus.length; i++) {
@@ -59,36 +56,26 @@ module.exports = {
           if (scoreStatus[i].vote == "upvote") {
             found = true;
             return `
-            <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
-              <button type="submit" class="unstyled_button"><i class="small material-icons orange-text">arrow_upward</i></button>
-            </form>
-            <div class="story_score">${score}</div>
-            <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
-              <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_downward</i></button>
-            </form>`;
+            <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons orange-text">arrow_upward</i></button>
+            <div class="story_score" id="score_${blogID}">${score}</div>
+            <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+            `;
           } else {
             found = true;
             return `
-            <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
-              <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_upward</i></button>
-            </form>
-            <div class="story_score">${score}</div>
-            <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
-              <button type="submit" class="unstyled_button light-blue-text text-darken-2"><i class="small material-icons">arrow_downward</i></button>
-            </form>`;
+            <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
+            <div class="story_score" id="score_${blogID}">${score}</div>
+            <button type="submit" id="downvote" value="${blogID}" class="unstyled_button light-blue-text text-darken-2"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+            `;
           }
         }
       }
-      // User not found in scoreStatus = hasn't voted yet
       if (!found) {
         return `
-        <form action="/blogs/upvote/${blogID}" method="POST" class="karmaForm">
-          <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_upward</i></button>
-        </form>
-        <div class="story_score">${score}</div>
-        <form action="/blogs/downvote/${blogID}" method="POST" class="karmaForm">
-          <button type="submit" class="unstyled_button"><i class="small material-icons">arrow_downward</i></button>
-        </form>`;
+        <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
+        <div class="story_score" id="score_${blogID}">${score}</div>
+        <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+        `;
       }
     }
   },
