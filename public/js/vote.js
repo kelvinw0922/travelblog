@@ -1,7 +1,6 @@
 $("#upvote").click(function() {
   var payload = { blogid: $(this).attr("value") };
   $.get("blogs/upvote", payload, function(data) {
-    console.log(data.newScore);
     $(`#score_${payload.blogid}`).text(data.newScore);
     if (data.colored) {
       $(`#upvote_${payload.blogid}`).addClass("orange-text");
@@ -16,7 +15,6 @@ $("#upvote").click(function() {
 $("#downvote").click(function() {
   var payload = { blogid: $(this).attr("value") };
   $.get("blogs/downvote", payload, function(data) {
-    console.log(data.newScore);
     $(`#score_${payload.blogid}`).text(data.newScore);
     if (data.colored) {
       $(`#downvote_${payload.blogid}`).addClass("light-blue-text");

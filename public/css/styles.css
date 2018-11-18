@@ -56,6 +56,10 @@ textarea {
   cursor: pointer;
 }
 
+.unstyled_button:focus {
+  background: none;
+}
+
 .karmaForm {
   display: inline;
 }

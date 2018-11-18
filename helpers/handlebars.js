@@ -65,7 +65,7 @@ module.exports = {
             return `
             <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
             <div class="story_score" id="score_${blogID}">${score}</div>
-            <button type="submit" id="downvote" value="${blogID}" class="unstyled_button light-blue-text text-darken-2"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+            <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons light-blue-text text-darken-2">arrow_downward</i></button>
             `;
           }
         }
