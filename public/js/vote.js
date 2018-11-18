@@ -1,4 +1,4 @@
-$("#upvote").click(function() {
+$("button.upvote").click(function() {
   var payload = { blogid: $(this).attr("value") };
   $.get("blogs/upvote", payload, function(data) {
     $(`#score_${payload.blogid}`).text(data.newScore);
@@ -12,7 +12,7 @@ $("#upvote").click(function() {
   });
 });
 
-$("#downvote").click(function() {
+$("button.downvote").click(function() {
   var payload = { blogid: $(this).attr("value") };
   $.get("blogs/downvote", payload, function(data) {
     $(`#score_${payload.blogid}`).text(data.newScore);

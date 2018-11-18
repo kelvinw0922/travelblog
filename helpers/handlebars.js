@@ -45,9 +45,9 @@ module.exports = {
   checkScoreStatus: function(scoreStatus, userID, blogID, score) {
     if (scoreStatus.length == 0) {
       return `
-      <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
+      <button type="submit" value="${blogID}" class="unstyled_button upvote"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
       <div class="story_score" id="score_${blogID}">${score}</div>
-      <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+      <button type="submit" value="${blogID}" class="unstyled_button downvote"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
       `;
     } else {
       var found = false;
@@ -56,25 +56,25 @@ module.exports = {
           if (scoreStatus[i].vote == "upvote") {
             found = true;
             return `
-            <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons orange-text">arrow_upward</i></button>
+            <button type="submit" value="${blogID}" class="unstyled_button upvote"><i id="upvote_${blogID}" class="small material-icons orange-text">arrow_upward</i></button>
             <div class="story_score" id="score_${blogID}">${score}</div>
-            <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+            <button type="submit" value="${blogID}" class="unstyled_button downvote"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
             `;
           } else {
             found = true;
             return `
-            <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
+            <button type="submit" value="${blogID}" class="unstyled_button upvote"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
             <div class="story_score" id="score_${blogID}">${score}</div>
-            <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons light-blue-text text-darken-2">arrow_downward</i></button>
+            <button type="submit" value="${blogID}" class="unstyled_button downvote"><i id="downvote_${blogID}" class="small material-icons light-blue-text text-darken-2">arrow_downward</i></button>
             `;
           }
         }
       }
       if (!found) {
         return `
-        <button type="submit" id="upvote" value="${blogID}" class="unstyled_button"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
+        <button type="submit" value="${blogID}" class="unstyled_button upvote"><i id="upvote_${blogID}" class="small material-icons">arrow_upward</i></button>
         <div class="story_score" id="score_${blogID}">${score}</div>
-        <button type="submit" id="downvote" value="${blogID}" class="unstyled_button"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
+        <button type="submit" value="${blogID}" class="unstyled_button downvote"><i id="downvote_${blogID}" class="small material-icons">arrow_downward</i></button>
         `;
       }
     }
