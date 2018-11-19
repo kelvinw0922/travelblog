@@ -33,6 +33,7 @@
         $(document).ready(function () {
             $('.sidenav').sidenav();
             $('select').formSelect();
+            $('textarea.comment').characterCounter();
         });
         CKEDITOR.replace('body', {
             plugins: 'wysiwygarea,toolbar,basicstyles,link'
