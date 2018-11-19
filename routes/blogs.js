@@ -162,7 +162,7 @@ router.post("/", upload, (req, res) => {
 });
 
 // Process Edit Blogs (PUT)
-router.put("/:id", (req, res) => {
+router.put("/:id", ensureAuthenticated, (req, res) => {
   //res.send("put");
   Blog.findOne({
     _id: req.params.id
@@ -188,14 +188,14 @@ router.put("/:id", (req, res) => {
 });
 
 // Process Delete Blogs (DELETE)
-router.delete("/:id", (req, res) => {
+router.delete("/:id", ensureAuthenticated, (req, res) => {
   Blog.findByIdAndDelete({ _id: req.params.id }).then(() => {
     res.redirect("/dashboard");
   });
 });
 
-// Add Comment
-router.post("/comment/:id", (req, res) => {
+// Add Comment - POST request
+router.post("/comment/:id", ensureAuthenticated, (req, res) => {
   Blog.findById({
     _id: req.params.id
   }).then(blog => {
@@ -216,7 +216,7 @@ router.post("/comment/:id", (req, res) => {
 });
 
 // Karma - Upvote
-router.get("/upvote", (req, res) => {
+router.get("/upvote", ensureAuthenticated, (req, res) => {
   // const val = req.query.blogid;
   // console.log(`In get, ${val}`);
   // res.send("Got upvote");
@@ -281,7 +281,7 @@ router.get("/upvote", (req, res) => {
 });
 
 // Karma - Downvote
-router.get("/downvote", (req, res) => {
+router.get("/downvote", ensureAuthenticated, (req, res) => {
   Blog.findOne({
     _id: req.query.blogid,
     scoreStatus: { $elemMatch: { voteUser: req.user.id } }
