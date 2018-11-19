@@ -75,3 +75,8 @@ textarea {
   width: 300px;
   height: 150px;
 }
+
+.bodyImage {
+  border: 4px solid grey;
+  width: 100%;
+}

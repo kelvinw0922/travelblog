@@ -9,8 +9,10 @@
             <div class="card-content word-wrapping">
                 <span class="card-title">{{formatDate blog.date 'MMMM Do YYYY'}}</span>
                 {{#if blog.coverImage.data}}
-                {{{writeImage blog.coverImage.data}}}
+                <hr>
+                {{{writeBodyImage blog.coverImage.data}}}
                 {{/if}}
+                <hr>
                 <!-- Need tripe bracket to parse HTML text -->
                 {{{blog.body}}}
             </div>

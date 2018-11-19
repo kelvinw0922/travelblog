@@ -19,6 +19,7 @@ const {
   editIcon,
   checkScoreStatus,
   writeImage,
+  writeBodyImage,
   defaultImage
 } = require("./helpers/handlebars");
 
@@ -89,6 +90,7 @@ app.engine(
       editIcon: editIcon,
       checkScoreStatus: checkScoreStatus,
       writeImage: writeImage,
+      writeBodyImage: writeBodyImage,
       defaultImage: defaultImage
     },
     defaultLayout: "main"
