@@ -33,10 +33,7 @@
         $(document).ready(function () {
             $('.sidenav').sidenav();
             $('select').formSelect();
-            $('textarea.comment').characterCounter();
-        });
-        CKEDITOR.replace('body', {
-            plugins: 'wysiwygarea,toolbar,basicstyles,link'
+            $('textarea.comment, textarea.journey').characterCounter();
         });
     </script>
     <script src="/js/vote.js"></script>
