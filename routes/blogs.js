@@ -31,7 +31,8 @@ router.get("/", (req, res) => {
     .sort({ date: "desc" })
     .then(blogs => {
       res.render("blogs/index", {
-        blogs: blogs
+        blogs: blogs,
+        voting: true
       });
     });
 });
@@ -42,7 +43,8 @@ router.get("/user/:userId", (req, res) => {
     .populate("user")
     .then(blogs => {
       res.render("blogs/index", {
-        blogs: blogs
+        blogs: blogs,
+        voting: true
       });
     });
 });
@@ -53,7 +55,8 @@ router.get("/my", ensureAuthenticated, (req, res) => {
     .populate("user")
     .then(blogs => {
       res.render("blogs/index", {
-        blogs: blogs
+        blogs: blogs,
+        voting: false
       });
     });
 });
