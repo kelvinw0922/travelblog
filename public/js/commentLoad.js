@@ -14,14 +14,15 @@ $(function() {
       theEnd = data.theEnd;
       Initload = true;
     });
+
     // Scrolling
-    if (!theEnd && Initload) {
+    if (!theEnd) {
       $(window).scroll(function() {
         var position = $(window).scrollTop();
         var bottom = $(document).height() - $(window).height();
 
         if (pathName.indexOf("/blogs/show/") >= 0) {
-          if (position == bottom && !theEnd) {
+          if (position == bottom && !theEnd && Initload) {
             $.get(`../comment/${blogid}`, payload, function(data) {
               payload.commentIndex += limit;
               loadComments(data.comments, blogid);
