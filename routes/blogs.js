@@ -218,6 +218,41 @@ router.post("/comment/:id", ensureAuthenticated, (req, res) => {
   });
 });
 
+// Get Comment - GET request
+router.get("/comment/:id", (req, res) => {
+  // res.send(req.params.id);
+  Blog.findOne({
+    _id: req.params.id
+  })
+    .populate("user")
+    .populate("comments.commentUser")
+    .then(blog => {
+      // Comments
+      if (
+        parseInt(req.query.commentIndex) -
+          1 +
+          parseInt(req.query.commentLimit) >=
+        blog.comments.length
+      ) {
+        var comments = blog.comments.slice(
+          parseInt(req.query.commentIndex) - 1,
+          parseInt(req.query.commentIndex) - 1 + blog.comments.length
+        );
+        var commentPayload = { comments: comments, theEnd: true };
+        res.send(commentPayload);
+      } else {
+        var comments = blog.comments.slice(
+          parseInt(req.query.commentIndex) - 1,
+          parseInt(req.query.commentIndex) -
+            1 +
+            parseInt(req.query.commentLimit)
+        );
+        var commentPayload = { comments: comments, theEnd: false };
+        res.send(commentPayload);
+      }
+    });
+});
+
 // Karma - Upvote
 router.get("/upvote", ensureAuthenticated, (req, res) => {
   // const val = req.query.blogid;
