@@ -39,6 +39,7 @@ function loadComments(data, blogid) {
   var result = "";
   var commentDiv = document.getElementById(`comment_${blogid}`);
   data.forEach(comment => {
+    console.log(comment.commentUser);
     var newComment = `
       <hr>
       <div class="card-content">
@@ -47,7 +48,7 @@ function loadComments(data, blogid) {
           <img src="${comment.commentUser.image}" alt="${
       comment.commentUser.firstName
     } ${comment.commentUser.lastName}">
-          <a href="/blogs/user/${comment.commentUser.id}">${
+          <a href="/blogs/user/${comment.commentUser._id}">${
       comment.commentUser.firstName
     } ${comment.commentUser.lastName}</a>
         </div>
